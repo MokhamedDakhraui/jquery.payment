@@ -1,10 +1,14 @@
 {spawn} = require 'child_process'
 path    = require 'path'
+process = require('process');
 
 binPath = (bin) -> path.resolve(__dirname, "./node_modules/.bin/#{bin}")
 
 runExternal = (cmd, args, callback = process.exit) ->
-  child = spawn(binPath(cmd), args, stdio: 'inherit')
+  if process.platform == 'win32'
+    child = spawn("cmd", ["/c", binPath(cmd), args...], stdio: 'inherit');
+  else
+    child = spawn(binPath(cmd), args, stdio: 'inherit')
   child.on('error', console.error)
   child.on('close', callback)
 
@@ -33,6 +37,6 @@ task 'watch', 'Watch src/ for changes', ->
 
 task 'test', 'Run tests', ->
   runSequential [
-    ['mocha', ['--compilers', 'coffee:coffee-script/register', 'test/jquery.coffee']]
-    ['mocha', ['--compilers', 'coffee:coffee-script/register', 'test/zepto.coffee']]
+    ['mocha', ['--require', 'coffeescript/register', 'test/jquery.coffee']]
+    ['mocha', ['--require', 'coffeescript/register', 'test/zepto.coffee']]
   ]

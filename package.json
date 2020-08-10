@@ -21,11 +21,21 @@
     "jquery": ">=1.7"
   },
   "devDependencies": {
-    "cake": "~0.1",
-    "coffee-script": "~1.7",
-    "jsdom": "~7.2",
-    "mocha": "~1.18",
-    "uglify-js": "~2.4.24",
-    "zeptojs": "~1.1"
+    "cake": "^0.1.1",
+    "coffeescript": "^2",
+    "jsdom": "^7.2",
+    "mocha": "^8.1.1",
+    "uglify-js": "^3.10.1",
+    "uglify-js-es6": "^2.8.9",
+    "zeptojs": "^1.1"
+  },
+  "bugs": {
+    "url": "https://github.com/stripe/jquery.payment/issues"
+  },
+  "homepage": "https://github.com/stripe/jquery.payment#readme",
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "test"
   }
 }
