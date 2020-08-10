@@ -100,9 +100,12 @@ $.payment.cards = cards = [
 cardFromNumber = (num) ->
   num = (num + '').replace(/\D/g, '')
   for card in cards
-    for pattern in card.patterns
-      p = pattern + ''
-      return card if num.substr(0, p.length) == p
+    switch typeof card.patterns
+      when 'function' then return card if card.patterns(num)
+      else
+        for pattern in card.patterns
+          p = pattern + ''
+          return card if num.substr(0, p.length) == p
 
 cardFromType = (type) ->
   return card for card in cards when card.type is type
